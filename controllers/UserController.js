@@ -1,4 +1,4 @@
-const {models} = require ('../models');
+const models = require ('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require ('jsonwebtoken');
 
@@ -14,7 +14,7 @@ exports.signin = async (req,res, next )=>{
 					id:user.id,
 					name:user.name,
 					email:user.email,
-					rol: user.rol
+					//rol: user.rol
 				},'texto-secreto',{
 					expiresIn:3600
 				});

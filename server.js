@@ -11,9 +11,9 @@ app.use(bodyPArser.json());
 app.use(bodyPArser.urlencoded({extended:true}));
 
 
-app.get('/',(req,res)=>{
-	res.send('Hello world');
-});
+// app.get('/',(req,res)=>{
+// 	res.send('Hello world');
+// });
 
 
 app.use('/api',apiRouter);
