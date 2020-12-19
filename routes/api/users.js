@@ -2,23 +2,24 @@ const router = require ('express').Router();
 const models = require('../../models');
 const bcrypt = require('bcryptjs');
 const UserController = require ('../../controllers/UserController.js');
-
-router.get('/', async (req,res)=>{
-	 const user = await models.user.findAll();
-	 res.status(200).json(user);
-	
-	console.log("estoy en api/auth");
-});
+const auth = require ('../../middlewares/auth.js');
 
 
-router.post ('/register', async(req,res)=>{
-	req.body.password= await bcrypt.hashSync(req.body.password, 10);
-	const user = await models.user.create(req.body);
-	res.status(200).json(user);
-	console.log("estoy en api/register");
-});
+/* acalo nuevo es que antes de pasar a los controladores se haran uso de uno middleware para hacer verificacines de los
+roles de usuario y permitir o no su gesion 
+
+tamien la logica del analisis del token se hara a traves de la carpeta que llamamos services con el archivo, toke.js
+
+*/
 
 
-router.post('/signin', UserController.signin);
-	
+ router.get('/list', auth.verificarVendedor, UserController.list);
+ router.post ('/register', auth.verificarAdmin, UserController.register); 
+ router.post('/update', auth.verificarAdmin, UserController.update);
+
+
+
+
+
+router.post('/signin', UserController.signin);	
 module.exports = router;

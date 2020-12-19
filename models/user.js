@@ -16,7 +16,9 @@ module.exports = (sequelize, DataTypes) => {
   user.init({
     name: DataTypes.STRING,
     password: DataTypes.STRING,
-    email: DataTypes.STRING
+    email: DataTypes.STRING,
+    rol: DataTypes.STRING,  // Se agrega manuealmente esto luego de la migracion
+    estado: DataTypes.INTEGER  // Se agrega manuealmente esto luego de la migracion
   }, {
     sequelize,
     modelName: 'user',
